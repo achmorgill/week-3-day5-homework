@@ -20,7 +20,12 @@ class Customer
 
   def Customer.all()
     sql = "SELECT * FROM customers"
-    return get_many_rows(sql)
+    return Customer.get_many_rows(sql)
+  end
+
+  def Customer.delete_all()
+    sql = "DELETE FROM customers"
+    SqlRunner.run(sql)
   end
 
   def Customer.get_many_rows(sql)
