@@ -10,6 +10,12 @@ class Ticket
       @customer_id = options['customer_id']
       @film_id = options['film_id']
       @id = options['id'].to_i
+
+    end
+
+    def delete()
+      sql = "DELETE FROM tickets WHERE id = #{@id}"
+      SqlRunner.run(sql)
     end
 
     def save()
@@ -18,7 +24,12 @@ class Ticket
       @id = result['id'].to_i
       return @id
     end
-# whats wrong with this class???????
+
+    def Ticket.delete_all()
+      sql = "DELETE FROM tickets"
+      SqlRunner.run(sql)
+    end
+
     def Ticket.all()
       sql = "SELECT * FROM tickets"
       # result = SqlRunner.run(sql)
@@ -27,12 +38,8 @@ class Ticket
       return result
     end
 
-    def Ticket.delete_all()
-      sql = "DELETE FROM tickets"
-      SqlRunner.run(sql)
-    end
-
     def Ticket.get_many_rows(sql)
+    
       tickets = SqlRunner.run(sql)
       result = tickets.map { |ticket| Ticket.new(Ticket)}
       return result

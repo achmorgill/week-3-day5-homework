@@ -19,6 +19,18 @@ class Film
       return @id
     end
 
+    def delete()
+      sql = "DELETE FROM films WHERE id = #{@id}"
+      SqlRunner.run(sql)
+    end
+
+    def update()
+      sql = "UPDATE films SET (title
+      ,price) = ('#{@title}','#{@price}') WHERE id = #{@id}"
+      SqlRunner.run(sql)
+
+    end
+
     def Film.all()
       sql = "SELECT * FROM films"
       result = Film.get_many_rows(sql)
@@ -35,6 +47,13 @@ class Film
     def Film.get_many_rows(sql)
       films = SqlRunner.run(sql)
       result = films.map { |film| Film.new(film)}
+      return result
+    end
+
+    def customers()
+      sql = "SELECT customers.* FROM customers, tickets WHERE tickets.customer_id = customers.id and tickets.film_id = #{@id}"
+      customer = SqlRunner.run(sql)
+      result = customer.map {|name| Customer.new(name)}
       return result
     end
 
