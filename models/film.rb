@@ -57,5 +57,11 @@ class Film
       return result
     end
 
+    def how_many_tickets_sold()
+      result = customers().count
+
+
+    end
+
 
 end

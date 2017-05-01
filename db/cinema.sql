@@ -19,3 +19,9 @@ customer_id INT4 REFERENCES customers(id) ON DELETE CASCADE,
 film_id INT4 REFERENCES films(id) ON DELETE CASCADE,
 id SERIAL4 PRIMARY KEY
 );
+
+-- CREATE TABLE screenings(
+-- film_id INT4 REFERENCES film(id) ON DELETE CASCADE,
+-- screening_time ,
+-- capacity INT2
+-- );

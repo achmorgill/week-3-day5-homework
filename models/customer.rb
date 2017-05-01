@@ -1,5 +1,6 @@
 require_relative('../db/sqlrunner.rb')
 
+
 class Customer
 
   attr_reader :id
@@ -52,17 +53,26 @@ class Customer
     return result
   end
 
-  def buy_a_ticket(selected_film)
-
-    puts "+++++++++++    #{selected_film}"
+  def buy_a_ticket(movie_title)
+  
     sql = "SELECT price FROM films
-    WHERE title = selected_film"
+    WHERE title = '#{movie_title}'"
 
     result = SqlRunner.run(sql).first
     price = result['price'].to_i
-   
+    film = result['film']
     @funds = @funds - price
+    sql = "UPDATE customers SET (price) VALUES ('#{@funds}' WHERE film = '#{film}')"
+puts "+++++++++++++#{sql}"
+result = SqlRunner.run(sql)
     return price
+  end
+
+  def how_many_tickets_bought()
+   
+   result = films()
+
+    return result.count
   end
 
 end
